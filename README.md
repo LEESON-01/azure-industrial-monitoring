@@ -1,73 +1,111 @@
-# Azure Industrial Monitoring Platform
+# Azure Industrial Telemetry Monitoring Pipeline
 
 ## Overview
-This project demonstrates the architecture of a cloud-native monitoring platform for industrial systems using Microsoft Azure.
 
-The platform is designed to collect, process, and monitor telemetry data from industrial equipment and sensors.
+This project simulates an industrial telemetry monitoring pipeline similar to what might be used in a manufacturing or industrial environment. Sensor data is generated, placed into a message queue, processed, and stored for later analysis.
 
-It uses Infrastructure as Code and modern cloud-native patterns.
+The project demonstrates how telemetry data flows through a simple processing architecture.
 
-## Project Structure
-
-azure-industrial-monitoring  
-│  
-├── app/  
-│   └── main.py  
-│  
-├── data-pipeline/  
-│   └── pipeline.py  
-│  
-├── docs/  
-│   └── architecture.md  
-│  
-├── functions/  
-│   └── function_app.py  
-│  
-└── infrastructure/  
-    └── terraform/  
-        └── main.tf  
-
+---
 
 ## Architecture
 
-Industrial Sensors  
-        ↓  
-Data Pipeline  
-        ↓  
-Azure Functions  
-        ↓  
-Monitoring Application  
-        ↓  
-Infrastructure managed with Terraform  
+Sensor Simulator
+      │
+      ▼
+Message Queue
+      │
+      ▼
+Telemetry Processor
+      │
+      ▼
+Stored Telemetry Data (JSON)
 
+---
+
+## Components
+
+### Sensor Simulator
+Generates simulated industrial telemetry data including:
+
+- Temperature
+- Pressure
+- Vibration
+- Timestamp
+
+The simulator produces telemetry events at regular intervals.
+
+Location:
+app/sensor_simulator.py
+
+---
+
+### Message Queue
+Acts as the communication layer between the telemetry generator and the processing service.
+
+Location:
+messaging/message_queue.py
+
+---
+
+### Telemetry Processor
+Consumes telemetry messages from the queue and stores them for later use.
+
+Location:
+processor/telemetry_processor.py
+
+---
+
+### Storage
+Telemetry data is stored locally in JSON format.
+
+Location:
+stored_data/telemetry.json
+
+---
+
+## Infrastructure
+
+Infrastructure resources can be provisioned using Terraform (Infrastructure as Code).
+
+Location:
+infrastructure/terraform/main.tf
+
+---
 
 ## Technologies Used
 
-- Microsoft Azure
-- Terraform (Infrastructure as Code)
 - Python
-- Azure Functions
-- Git & GitHub
-- Linux
+- Message Queue Architecture
+- Docker
+- Terraform (Infrastructure as Code)
+- JSON Data Storage
 
+---
 
-## Purpose of the Project
+## Running the Project
 
-The goal of this project is to demonstrate:
+Run the telemetry simulator:
 
-- Cloud infrastructure design
-- Infrastructure as Code using Terraform
-- Serverless event processing
-- Data pipeline architecture
-- Cloud-native monitoring patterns
+python3 -m app.sensor_simulator
 
-This project is part of a **Cloud Engineering and DevOps portfolio**.
+Run the telemetry processor:
 
+python3 -m processor.telemetry_processor
 
-## Future Improvements
+---
 
-- Add real Azure Function code
-- Implement telemetry ingestion pipeline
-- Deploy infrastructure using Terraform
-- Add monitoring and alerting
-- Integrate CI/CD pipeline
+## Example Telemetry Data
+
+{
+ "timestamp": "2026-03-07T10:11:26.780453",
+ "temperature": 89.79,
+ "pressure": 26.85,
+ "vibration": 3.57
+}
+
+---
+
+## Purpose
+
+This project demonstrates the flow of telemetry data through a simple monitoring pipeline and illustrates concepts used in cloud-based monitoring systems.
