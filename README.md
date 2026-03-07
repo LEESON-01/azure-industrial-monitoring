@@ -1,4 +1,4 @@
-# Azure Industrial Telemetry Monitoring Pipeline
+# Industrial Telemetry Processing Pipeline
 
 ## Overview
 
