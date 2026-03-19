@@ -2,6 +2,7 @@ import random
 import time
 import json
 from datetime import datetime
+from messaging.message_queue import send_to_queue
 
 def generate_sensor_data():
     data = {
@@ -16,4 +17,5 @@ def generate_sensor_data():
 while True:
     telemetry = generate_sensor_data()
     print(json.dumps(telemetry))
+    send_to_queue(telemetry)
     time.sleep(2)
